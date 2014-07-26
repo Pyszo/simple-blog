@@ -1,0 +1,30 @@
+<div class="logotop">
+	<div class="container" id="login">
+		<div ng-show="isLog">
+			<h3 class="text-right" id="welcome">Hi {[{nick}]}!</h3>
+			<h4 class="text-right"  style="margin-top: 80px"><a href="/logout"><button class="btn btn-lg btn-primary">Log out</button></a></h4>
+		</div>
+		<div ng-controller="hideEditCtrl as hide" ng-hide="isLog">
+			<div ng-hide="hide.ctrl">
+				<form action="/login" method="post">
+					<input type='hidden' name='csrfmiddlewaretoken' value='{[{token}]}'>
+					<input type="text" name="username" placeholder="Nick" class="form-control" required autofocus />
+					<input type="password" name="password" placeholder="Password" class="form-control" required />
+					<button class="btn btn-lg btn-primary" id="left-button" type="submit">Log in</button>
+				</form>
+				<button class="btn btn-lg btn-primary" id="right-button" ng-click="hide.ctrl=true">Register</button>
+			</div>
+			<div ng-controller="userCheck as check" ng-show="hide.ctrl">
+				<form action="/register" method="post" >
+					<input type='hidden' name='csrfmiddlewaretoken' value='{[{token}]}'>
+					<input type="text" name="username" placeholder="Nick" class="form-control" ng-model="check.nick" ng-change="check.check()" id="{[{check.reg}]}" required autofocus />
+					<input type="email" name="email" placeholder="E-mail" class="form-control" required />
+					<input type="password" name="password" placeholder="Password" class="form-control" required />
+					<button ng-hide="check.reg=='myError'" class="btn btn-lg btn-primary btn-block" id="left-button" type="submit">Register</button>
+					<button ng-show="check.reg=='myError'" class="btn btn-lg btn-primary btn-block" disabled="disabled" id="left-button">Register</button>
+				</form>
+				<button class="btn btn-lg btn-primary btn-block" id="right-button" ng-click="hide.ctrl=false">Log in</button>
+			</div>
+		</div>
+	</div>
+</div>

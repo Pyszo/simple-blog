@@ -1,0 +1,47 @@
+{%extends "Blog/base.html" %}
+
+{% block entries %}<br />
+	<div class="index">
+		<div ng-controller="EntriesAll" ng-init="getEntries()">
+			<table class="table-border">
+				<tr>
+					<td class="table-border">
+						<div ng-show="no_entries" class="entries text-center">There is no enteries yet!</div>
+						<div ng-hide="no_entries" class="entries">
+							<div ng-repeat="en in entries">
+								<a name="{[{en.id}]}"></a>
+								<h2>{[{en.title}]}</h2>
+								<p ng-init="a=false" ng-hide="a"><br />{[{en.text | limitTo: 300}]}...</p>
+								<p ng-show="a"><br />{[{en.text}]}</p>
+								<h3 class="text-right"><small>Author: {[{en.author}]}</small></h3>
+								<h4 class="text-right"><small>{[{en.pub_date | date:'medium'}]}</small></h4>
+								<h4 class="text-right">
+									<a ng-click="a=true" ng-hide="a">Show more</a>
+									<a ng-click="a=false" ng-show="a">Show less</a>
+								</h4>
+								<div class="hr"></div><br />
+								<comments></comments>
+								<hr color="red" />
+							</div>
+						</div>
+					</td>
+					<td class="right-side">
+						<div class="fixed-panel list-group" id="fp">
+							<h4><a ng-click="page=1; getEntries()" class="btn btn-lg btn-primary btn-block">Main Page</a>
+							<div ng-repeat="en in entries">
+								<a href="#{[{en.id}]}" class="list-group-item text-center">{[{en.title}]}</a>
+							</div>
+							
+								<a ng-show="prev" ng-click="page=page-1; getEntries()" class="btn btn-lg btn-primary" id="both-buttons">Previous</a>
+								<a ng-hide="prev" class="btn btn-lg btn-primary" disabled="disabled" id="both-buttons">Previous</a>
+								<a ng-show="next" ng-click="page=page+1; getEntries()" class="btn btn-lg btn-primary" id="both-buttons">Next</a>
+								<a ng-hide="next" class="btn btn-lg btn-primary" disabled="disabled" id="both-buttons">Next</a>
+							</h4>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<script type="text/javascript" src="{{ STATIC_URL }}javascript/fixedpanel.js"></script>
+{% endblock %}

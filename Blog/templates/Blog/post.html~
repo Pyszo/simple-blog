@@ -1,0 +1,14 @@
+<li>{{ post.tytul }}</li>
+{{ post.tresc }}
+
+<form action="/post/{{ post.id }}/koment" method="post">
+{% csrf_token %}
+	<input type="text" name="nick" />
+	<input type="submit" value="wyslij" />
+</form>
+
+{% for koment in post.komentarz_set.all %}
+	<li>{{koment.nick}}</li>
+	{{koment.tresc}}
+{% endfor %}
+

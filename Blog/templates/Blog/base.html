@@ -1,0 +1,17 @@
+<html ng-app="blog">
+	<head>
+		<link rel="stylesheet" type="text/css" href="{{STATIC_URL }}lib/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="{{STATIC_URL }}css/aaa.css" />
+		<script type="text/javascript" src="{{ STATIC_URL }}lib/angular.min.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}lib/angular-cookies.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}javascript/aaa.js"></script>
+	</head>
+	<body ng-controller="userInfo" ng-init="info('{{user.is_authenticated}}','{{user.is_superuser}}','{{user.username}}')">
+		<div class="page">
+			<top-panel></top-panel>
+			{% block entries %}
+			{% endblock %}
+		</div>
+
+	</body>
+</html>
