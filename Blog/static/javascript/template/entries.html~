@@ -1,1 +1,0 @@
-<li ng-app="entriesAll as entry">{{ entry.entries.all.pub_date }}</li>
